@@ -25,12 +25,12 @@ void getErrorNodeCreation(void) {
 Data *createData(void) {
     Data *newData = (Data *) calloc(1, sizeof(Data));
     if(!newData) getErrorDataCreation();
-    getData(newData);
+    genData(newData);
     
     return newData;
 }
 
-void getData(Data *newData) {
+void genData(Data *newData) {
     newData->ID = 1 + rand() % MAX_ID;
 }
 
@@ -78,8 +78,8 @@ Node *dequeue(Node **front) {
     } else {
         Node *dequeuedNode = *front;
         *front = (*front)->next;
-
-//        Don't free the node ?
+        
+        //        Don't free the node ?
         return dequeuedNode;
     }
 }
@@ -101,11 +101,43 @@ Node *pop(Node **head) {
         Node *poppedNode = *head;
         *head = (*head)->next;
         
-//        Don't free the node ?
+        //        Don't free the node ?
         return poppedNode;
     }
 }
 
 void printStack(Node *head) {
     while (!isEmpty(head)) printNode(pop(&head));
+}
+
+//    Basic Test for Queue
+void testQueue(void) {
+    Node *front = NULL, *rear = NULL;
+    for(int i = 0; i < 5; i++) {
+        Node *newNode = createNode();
+        enqueue(&front, &rear, newNode);
+    }
+    
+    printQueue(front); //by value
+    
+    for(int i = 0; i < 5; i++) {
+        Node *dequeuedNode = dequeue(&front);
+        printNode(dequeuedNode);
+    }
+}
+
+//    Basic Test for Stack
+void testStack(void) {
+    Node *head = NULL;
+    for(int i = 0; i < 5; i++) {
+        Node *newNode = createNode();
+        push(&head, newNode);
+    }
+    
+    printStack(head); //by value
+    
+    for(int i = 0; i < 5; i++) {
+        Node *poppedNode = pop(&head);
+        printNode(poppedNode);
+    }
 }

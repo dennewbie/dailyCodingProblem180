@@ -43,7 +43,7 @@ typedef struct node Node;
 Node *createNode(void);
 void getErrorNodeCreation(void);
 Data *createData(void);
-void getData(Data *);
+void genData(Data *);
 void getErrorDataCreation(void);
 
 void printNode(Node *);
@@ -60,3 +60,6 @@ Node *pop(Node **);
 
 Bool isEmpty(Node *);
 void getMessageIsEmpty(char *);
+
+void testStack(void);
+void testQueue(void);
