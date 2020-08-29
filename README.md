@@ -1,5 +1,5 @@
 # Daily Coding Problem 180
-## This problem was asked by Google. Level: Medium
+### This problem was asked by Google. Level: Medium
 
 Given a stack of N elements, interleave the first half of the stack with the second half reversed using only one other queue. This should be done in-place.
 
