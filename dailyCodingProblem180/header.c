@@ -47,21 +47,19 @@ void printQueue(Node *front) {
     while (!isEmpty(front)) printNode(dequeue(&front));
 }
 
+void printStack(Node *head) {
+    newLine();
+    printf("* Stack Content: *\n\n");
+    while (!isEmpty(head)) printNode(pop(&head));
+    newLine();
+}
+
 unsigned short int generateIntegerNumber() {
     return 1 + rand() % MAX_SIZE;
 }
 
-Bool isEmpty(Node *front) {
-    return !front ? TRUE : FALSE;
-}
-
-void getMessageIsEmpty(char *dataStructureString) {
-    newLine();
-    printf("%s is empty...\n", dataStructureString);
-}
-
 void enqueue(Node **front, Node **rear, Node *newNode) {
-    if(!newNode) getErrorNodeCreation();
+    if(!newNode) return;
     
     if(isEmpty(*front)) {
         *front = *rear = newNode;
@@ -79,12 +77,13 @@ Node *dequeue(Node **front) {
         Node *dequeuedNode = *front;
         *front = (*front)->next;
         
-        //        Don't free the node ?
         return dequeuedNode;
     }
 }
 
 void push(Node **head, Node *newNode) {
+    if(!newNode) return;
+    
     if(isEmpty(*head)) {
         *head = newNode;
     } else {
@@ -101,13 +100,39 @@ Node *pop(Node **head) {
         Node *poppedNode = *head;
         *head = (*head)->next;
         
-        //        Don't free the node ?
         return poppedNode;
     }
 }
 
-void printStack(Node *head) {
-    while (!isEmpty(head)) printNode(pop(&head));
+Bool isEmpty(Node *front) {
+    return !front ? TRUE : FALSE;
+}
+
+void getMessageIsEmpty(char *dataStructureString) {
+    newLine();
+    printf("%s is empty...\n", dataStructureString);
+}
+
+void updateStack(Node **head, unsigned short int nNodes) {
+    Node *front, *rear;
+    front = rear = NULL;
+    
+    for(int i = 1; i < nNodes - 1; i++) {
+        for(int j = 0; j < nNodes - i; j++) {
+            Node *poppedNode = pop(head);
+            Node *newNode = createNode();
+            newNode->nodeData = poppedNode->nodeData;
+            enqueue(&front, &rear, newNode);
+        }
+        
+        for(int j = 0; j < nNodes - i; j++) {
+            Node *dequeuedNode = dequeue(&front);
+            push(head, dequeuedNode);
+        }
+    }
+    
+    newLine();
+    printf("Updating Stack ...");
 }
 
 //    Basic Test for Queue

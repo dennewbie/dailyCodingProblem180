@@ -18,7 +18,7 @@
 #define QUEUE "Queue"
 #define STACK "Stack"
 
-#define newLine() { printf("\n\n\n"); }
+#define newLine() { printf("\n\n"); }
 
 #endif /* header_h */
 
@@ -61,5 +61,7 @@ Node *pop(Node **);
 Bool isEmpty(Node *);
 void getMessageIsEmpty(char *);
 
-void testStack(void);
+void updateStack(Node **, unsigned short int);
+
 void testQueue(void);
+void testStack(void);
